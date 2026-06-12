@@ -17,12 +17,17 @@ public class Application {
             miaCollezione.aggiungiGioco(gta5);
             miaCollezione.aggiungiGioco(monopoly);
 
-            System.out.println("Gioco aggiunto con successo!");
+            System.out.println("Gioco aggiunto con successo! Ora nella tua collezione ci sono: \n" + miaCollezione);
         } catch (Exception e) {
             System.out.println("Si è verificato un problema: " + e.getMessage());
         }
 
-        System.out.println(miaCollezione);
+        try {
+            String nomeGioco = miaCollezione.ricercaPerId(3);
+            System.out.println("Il gioco da te cercato è: " + nomeGioco);
+        } catch (Exception e) {
+            System.out.println("Si è verificato un problema: " + e.getMessage());
+        }
 
 
     }

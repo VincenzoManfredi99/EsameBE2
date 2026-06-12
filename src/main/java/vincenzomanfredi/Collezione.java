@@ -21,6 +21,17 @@ public class Collezione {
         } else listaGiochi.add(nuovoGioco);
     }
 
+    public String ricercaPerId(int idCercato) throws Exception {
+
+        String nomeGioco = listaGiochi.stream().filter(g -> g.getId() == idCercato).map(Gioco::getTitolo).collect(Collectors.joining());
+
+        if (nomeGioco.isEmpty()) {
+            throw new Exception(" l'id che stai cercando non esiste");
+        }
+        return nomeGioco;
+    }
+
+
     @Override
     public String toString() {
         return listaGiochi.stream().map(Gioco::toString).collect(Collectors.joining("\n"));

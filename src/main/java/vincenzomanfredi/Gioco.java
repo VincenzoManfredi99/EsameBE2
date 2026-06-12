@@ -22,4 +22,8 @@ public class Gioco {
     public int getId() {
         return id;
     }
+
+    public String getTitolo() {
+        return titolo;
+    }
 }
