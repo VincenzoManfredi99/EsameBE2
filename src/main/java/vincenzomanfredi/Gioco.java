@@ -18,4 +18,8 @@ public class Gioco {
     public String toString() {
         return id + " - " + titolo + " - " + annoUscita + " - " + prezzo + "€ ";
     }
+
+    public int getId() {
+        return id;
+    }
 }

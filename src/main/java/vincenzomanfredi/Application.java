@@ -11,8 +11,18 @@ public class Application {
         Gioco monopoly = new BoardGame(2, "Monopoly", 2000, 20.0, 6, 90);
 
         List<Gioco> giochi = List.of(gta5, monopoly);
+        Collezione miaCollezione = new Collezione();
 
-        System.out.println(giochi);
+        try {
+            miaCollezione.aggiungiGioco(gta5);
+            miaCollezione.aggiungiGioco(monopoly);
+
+            System.out.println("Gioco aggiunto con successo!");
+        } catch (Exception e) {
+            System.out.println("Si è verificato un problema: " + e.getMessage());
+        }
+
+        System.out.println(miaCollezione);
 
 
     }
