@@ -23,6 +23,7 @@ public class Application {
             System.out.println("Gioco aggiunto con successo! Ora nella tua collezione ci sono: \n" + miaCollezione);
         } catch (Exception e) {
             System.out.println("Si è verificato un problema: " + e.getMessage());
+            System.out.println(e.getStackTrace().toString());
         }
 
 

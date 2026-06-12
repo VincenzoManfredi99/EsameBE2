@@ -52,11 +52,11 @@ public class Collezione {
     }
 
     public void rimozioneTramiteId(int idDaRimuovere) throws Exception {
-        List<Gioco> listaGiochiDaCancellare = listaGiochi.stream().filter(g -> g.getId() == idDaRimuovere).toList();
-        if (listaGiochiDaCancellare.isEmpty()) {
+        Gioco giocoDaEliminare = listaGiochi.stream().filter(g -> g.getId() == idDaRimuovere).toList().getFirst();
+        if (giocoDaEliminare == null) {
             throw new Exception("l'id inserito non è presente nella tua collezione");
         }
-        Gioco giocoDaEliminare = listaGiochiDaCancellare.getFirst();
+
         listaGiochi.remove(giocoDaEliminare);
     }
 
