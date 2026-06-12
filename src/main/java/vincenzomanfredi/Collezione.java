@@ -1,6 +1,7 @@
 package vincenzomanfredi;
 
 import java.util.ArrayList;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,6 +58,11 @@ public class Collezione {
         }
         Gioco giocoDaEliminare = listaGiochiDaCancellare.getFirst();
         listaGiochi.remove(giocoDaEliminare);
+    }
+
+    public void statistics() {
+        DoubleSummaryStatistics stats = listaGiochi.stream().mapToDouble(Gioco::getPrezzo).summaryStatistics();
+        System.out.println(stats);
     }
 
     @Override
