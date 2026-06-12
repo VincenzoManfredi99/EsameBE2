@@ -14,4 +14,8 @@ public class BoardGame extends Gioco {
     public String toString() {
         return super.toString() + nGiocatori + " GIocatori" + " - " + durataPartita + " min per partita";
     }
+
+    public int getNgiocatori() {
+        return nGiocatori;
+    }
 }

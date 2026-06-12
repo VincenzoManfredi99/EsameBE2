@@ -39,6 +39,17 @@ public class Collezione {
         return giochiInferiori;
     }
 
+    public List<String> ricercaPerNumGiocatori(int ngiocatori) throws Exception {
+        List<String> giocoPerNumGiocatori =
+                listaGiochi.stream().filter(g -> g instanceof BoardGame).map(g -> (BoardGame) g) //Conversione in BoardGame per accedere a getNgiocatori
+                        .filter(bg -> bg.getNgiocatori() == ngiocatori).map(BoardGame::getTitolo).toList();
+
+        if (giocoPerNumGiocatori.isEmpty()) {
+            throw new Exception(" non esistono giochi con questo numero di giocatori");
+        }
+        return giocoPerNumGiocatori;
+    }
+
     @Override
     public String toString() {
         return listaGiochi.stream().map(Gioco::toString).collect(Collectors.joining("\n"));
