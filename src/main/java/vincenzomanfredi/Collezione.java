@@ -50,6 +50,15 @@ public class Collezione {
         return giocoPerNumGiocatori;
     }
 
+    public void rimozioneTramiteId(int idDaRimuovere) throws Exception {
+        List<Gioco> listaGiochiDaCancellare = listaGiochi.stream().filter(g -> g.getId() == idDaRimuovere).toList();
+        if (listaGiochiDaCancellare.isEmpty()) {
+            throw new Exception("l'id inserito non è presente nella tua collezione");
+        }
+        Gioco giocoDaEliminare = listaGiochiDaCancellare.getFirst();
+        listaGiochi.remove(giocoDaEliminare);
+    }
+
     @Override
     public String toString() {
         return listaGiochi.stream().map(Gioco::toString).collect(Collectors.joining("\n"));

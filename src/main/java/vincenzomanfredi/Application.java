@@ -43,5 +43,13 @@ public class Application {
             System.out.println("Si è verificato un problema:" + e.getMessage());
         }
 
+        try {
+            miaCollezione.rimozioneTramiteId(2);
+
+        } catch (Exception e) {
+            System.out.println("Si è verificato un problema:" + e.getMessage());
+        }
+        System.out.println("La tua collezione aggiornata è: " + miaCollezione);
+
     }
 }
