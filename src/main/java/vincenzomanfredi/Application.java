@@ -29,6 +29,13 @@ public class Application {
             System.out.println("Si è verificato un problema: " + e.getMessage());
         }
 
+        try {
+            List<String> giochiInferiori = miaCollezione.ricercaPerPrezzo(30);
+            System.out.println("I giochi inferiori alla cifra inserita sono: " + giochiInferiori);
+        } catch (Exception e) {
+            System.out.println("Si è verificato un problema: " + e.getMessage());
+        }
+
 
     }
 }

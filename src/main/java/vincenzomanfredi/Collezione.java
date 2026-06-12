@@ -31,6 +31,13 @@ public class Collezione {
         return nomeGioco;
     }
 
+    public List<String> ricercaPerPrezzo(double prezzoMassimo) throws Exception {
+        List<String> giochiInferiori = listaGiochi.stream().filter(g -> g.getPrezzo() < prezzoMassimo).map(Gioco::getTitolo).toList();
+        if (giochiInferiori.isEmpty()) {
+            throw new Exception(" non esistono giochi con un prezzo inferiore a " + prezzoMassimo + " €");
+        }
+        return giochiInferiori;
+    }
 
     @Override
     public String toString() {
