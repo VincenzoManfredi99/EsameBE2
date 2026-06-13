@@ -1,6 +1,5 @@
 package vincenzomanfredi;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,7 +9,7 @@ public class Application {
         Scanner tastiera = new Scanner(System.in);
 
 
-        Gioco gta5 = new Videogiochi(1, "Gta5", 2013, 15.0, List.of("Pc", "Xbox", "PlayStation"), 12, List.of(Genere.Action, Genere.GDR));
+        Gioco gta5 = new Videogiochi(1, "Gta5", 2013, 15.0, List.of("Pc", "Xbox", "PlayStation"), 12, List.of(Genere.ACTION, Genere.GDR));
         Gioco monopoly = new BoardGame(2, "Monopoly", 2000, 20.0, 6, 90);
 
         List<Gioco> giochi = List.of(gta5, monopoly);
@@ -54,45 +53,47 @@ public class Application {
                         return;
                     }
 
-                    int id = 0;
-                    String titolo = "";
-                    double prezzo = 0;
-                    int annoUscita = 0;
-
                     System.out.println("Inserisci un id: ");
-                    id = tastiera.nextInt();
-                    tastiera.nextLine();  //Titolo veniva saltato andando a prezzo
+                    int id = miaCollezione.inputId();
                     System.out.println("Inserisci un titolo: ");
-                    titolo = tastiera.nextLine();
+                    String titolo = miaCollezione.inputTitolo();
                     System.out.println("Inserisci un prezzo: ");
-                    prezzo = tastiera.nextDouble();
-                    System.out.println("Inserisci l'anno d'uscita: ");
-                    annoUscita = tastiera.nextInt();
+                    double prezzo = miaCollezione.inputPrezzo();
 
 
                     if (sceltaAdd == 1) {
-                        String inputPiattaforma = "";
-                        List<String> piattaforma = Arrays.asList(inputPiattaforma.split(",")); //taglia la stringa ad ogni virgola dando come risultato un array di stringhe come vuole l'attributo piattaforma
-                        String inputGeneri = "";
-                        int durata = 0;
+                        System.out.println("Inserisci l'anno d'uscita: ");
+                        int annoUscita = miaCollezione.inputAnnoVideogames();
+
                         System.out.println("Inserisci la piattaforma di gioco: ");
-                        inputPiattaforma = tastiera.nextLine();
+                        List<String> piattaforma = miaCollezione.inputPiattaforma(); //taglia la stringa ad ogni virgola dando come risultato un array di stringhe come vuole l'attributo piattaforma
+
+                        Genere genere = miaCollezione.inputGenere();
+                        List<Genere> listaGeneri = List.of(genere);
+
                         System.out.println("Inserisci la durata del gioco: ");
-                        durata = tastiera.nextInt();
-                        System.out.println("Inserisci il genere del gioco: ");
-                        inputGeneri = tastiera.nextLine();
-                        Genere genere = Genere.valueOf(inputGeneri);
+                        int durata = miaCollezione.inputDurata();
+
+
+                        Videogiochi nuovoVideogioco = new Videogiochi(id, titolo, annoUscita, prezzo, piattaforma, durata, listaGeneri);
+
+                        try {
+                            miaCollezione.aggiungiGioco(nuovoVideogioco);
+                            System.out.println("Gioco aggiunto con successo!");
+                        } catch (Exception e) {
+                            System.out.println("Si è verificato un problema: " + e.getMessage());
+                        }
 
 
                     } else {
-                        int nGiocatori = 0;
-                        int durataPartita = 0;
+                        System.out.println("Inserisci l'anno d'uscita: ");
+                        int annoUscita = miaCollezione.inputAnnoBoardgame();
                         System.out.println("Inserisci il numero di giocatori di questo gioco da tavolo: ");
-                        nGiocatori = tastiera.nextInt();
+                        int nGiocatori = miaCollezione.inputNgiocatori();
                         System.out.println("Inserisci la durata media di una partita: ");
-                        durataPartita = tastiera.nextInt();
+                        int durata = miaCollezione.inputDurata();
 
-                        BoardGame nuovoBoardGame = new BoardGame(id, titolo, annoUscita, prezzo, nGiocatori, durataPartita);
+                        BoardGame nuovoBoardGame = new BoardGame(id, titolo, annoUscita, prezzo, nGiocatori, durata);
 
                         try {
                             miaCollezione.aggiungiGioco(nuovoBoardGame);
@@ -100,7 +101,6 @@ public class Application {
                         } catch (Exception e) {
                             System.out.println("Si è verificato un problema: " + e.getMessage());
                         }
-
                     }
                     break;
 
@@ -158,6 +158,7 @@ public class Application {
                 default:
                     System.out.println("Opzione non valida! Riprova.");
                     break;
+
             }
         }
 

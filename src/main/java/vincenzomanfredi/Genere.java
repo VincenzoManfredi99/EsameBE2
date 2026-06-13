@@ -1,8 +1,8 @@
 package vincenzomanfredi;
 
 public enum Genere {
-    Action,
+    ACTION,
     GDR,
-    Soulslike,
-    Arcade,
+    SOULSLIKE,
+    ARCADE,
 }
