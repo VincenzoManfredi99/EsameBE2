@@ -37,6 +37,7 @@ public class Application {
             System.out.println("Premi 4 per cercare giochi in base al numero di giocatori");
             System.out.println("Premi 5 per rimuovere un gioco tramite id");
             System.out.println("Premi 6 per conoscere le statistiche della collezione");
+            System.out.println("Premi 7 per aggiornare un gioco tramite Id");
 
             System.out.print("Scegli un'opzione: ");
             scelta = tastiera.nextInt();
@@ -150,6 +151,11 @@ public class Application {
 
                 case 6:
                     miaCollezione.statistics();
+
+                case 7:
+                    
+                    miaCollezione.aggiornaGioco();
+                    break;
 
                 case 0:
                     System.out.println("Grazie per aver usato il programma. Arrivederci!");

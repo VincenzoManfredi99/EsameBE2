@@ -67,7 +67,7 @@ public class Collezione {
             int annoDiUscita = Integer.parseInt(tastiera.nextLine().trim());
             int annoCorrente = LocalDate.now().getYear();
 
-            if (annoDiUscita < annoCorrente) {
+            if (annoDiUscita > annoCorrente) {
                 System.out.println("Errore, l'anno selezionato non è valido");
                 continue;
             }
@@ -133,6 +133,7 @@ public class Collezione {
         } else listaGiochi.add(nuovoGioco);
     }
 
+
     public String ricercaPerId(int idCercato) throws Exception {
 
         String nomeGioco = listaGiochi.stream().filter(g -> g.getId() == idCercato).map(Gioco::getTitolo).collect(Collectors.joining());
@@ -170,6 +171,71 @@ public class Collezione {
 
         listaGiochi.remove(giocoDaEliminare);
     }
+
+    public void aggiornaGioco() {
+        System.out.println("Inserisci l'ID del gioco da modificare:");
+
+        int idDaCercare = Integer.parseInt((tastiera.nextLine()).trim());
+
+        // Optional, con lui evito il doppio ciclo dovuto ad anymatch con la creazione di un if ed else se l'id esiste e poi il getFirst
+        Optional<Gioco> giocoOpt = listaGiochi.stream()
+                .filter(g -> g.getId() == idDaCercare)
+                .findFirst();
+
+        if (giocoOpt.isPresent()) {
+            Gioco giocoVecchio = giocoOpt.get();
+
+
+            System.out.println("Inserisci il nuovo titolo: ");
+            String nuovoTitolo = inputTitolo();
+
+            System.out.println("Inserisci un nuovo prezzo: ");
+            int nuovoPrezzo = inputPrezzo();
+
+
+            if (giocoVecchio instanceof Videogiochi) {
+
+                System.out.println("Inserisci nuova data di uscita: ");
+                int nuovaData = inputAnnoVideogames();
+
+                System.out.println("Inserisci le nuove piattaforme: ");
+                List<String> nuovePiattaforme = inputPiattaforma();
+
+                System.out.println("Inserisci la nuova durata: ");
+                int nuovaDurata = inputDurata();
+
+                Genere genere = inputGenere();
+                List<Genere> listaGeneri = List.of(genere);
+
+                Videogiochi nuovoVideogioco = new Videogiochi(idDaCercare, nuovoTitolo, nuovaData, nuovoPrezzo, nuovePiattaforme, nuovaDurata, listaGeneri);
+
+                listaGiochi.remove(giocoVecchio);
+                listaGiochi.add(nuovoVideogioco);
+
+            } else if (giocoVecchio instanceof BoardGame) {
+
+                System.out.println("Inserisci nuova data di uscita: ");
+                int nuovaData = inputAnnoBoardgame();
+
+                System.out.println("Inserisci numero giocatori: ");
+                int nuovoNgiocatori = inputNgiocatori();
+
+                System.out.println("Inserisci la nuova durata: ");
+                int nuovaDurata = inputDurata();
+
+                BoardGame nuovoBoardGame = new BoardGame(idDaCercare, nuovoTitolo, nuovaData, nuovoPrezzo, nuovoNgiocatori, nuovaDurata);
+
+                listaGiochi.remove(giocoVecchio);
+                listaGiochi.add(nuovoBoardGame);
+            }
+
+            System.out.println("Gioco sostituito e aggiornato con successo!");
+
+        } else {
+            System.out.println("Errore, l'id da te selezionato non esiste.");
+        }
+    }
+
 
     public void statistics() {
         DoubleSummaryStatistics stats = listaGiochi.stream().mapToDouble(Gioco::getPrezzo).summaryStatistics();
